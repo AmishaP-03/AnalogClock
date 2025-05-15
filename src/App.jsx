@@ -1,5 +1,9 @@
-function App() {
+import AnalogClock from "./AnalogClock"
 
+function App() {
+    return (
+        <AnalogClock />
+    );
 }
 
-export default App
+export default App;
