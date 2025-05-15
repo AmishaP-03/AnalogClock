@@ -1,11 +1,35 @@
 import { useEffect, useState } from "react";
+import './AnalogClock.css';
 
 function AnalogClock() {
     // State to manage time
     const [currentTime, setCurrentTime] = useState(new Date());
+    const [numbersUI, setNumbersUI] = useState();
 
     // Registers setInterval (to update the clock every 1 sec) when the component is first mounted
+    // Also defines the UI to display numbers on clock
     useEffect(() => {
+
+        // Maps an empty array of length 12 to the desired UI
+        const ui = [...Array(12)].map((_, i) => {
+            const number = i + 1;
+            const angle = number * 30;
+            return (
+            <div
+                key={number}
+                className="number"
+                style={{
+                transform: `rotate(${angle}deg) translate(8rem) rotate(-${angle}deg)` 
+                // 1. rotate(angle): Rotates the number to its correct position on the circle. 
+                // 2. translate(8rem): Pushes it outward from the center to the clock’s edge; depends on the size of the clock.
+                // 3. rotate(-angle): Keeps the text upright instead of rotated.
+                }}
+            >
+                {number}
+            </div>
+            );
+        });
+        setNumbersUI(ui);
 
         // Updates the clock with the current time in every sec
         const interval = setInterval(() => {
@@ -34,11 +58,12 @@ function AnalogClock() {
 
 
     return (
-        <section class="clock">
-            <div id="hour-hand" style={{transform: `rotate(${hourDegree}deg)`}}></div>
-            <div id="minute-hand" style={{transform: `rotate(${minuteDegree}deg)`}}></div>
-            <div id="sec-hand" style={{transform: `rotate(${secDegrees}deg)`}}></div>
-            <div id="center"></div>
+        <section className="clock">
+            <div className="numbers-section">{numbersUI}</div>
+            <div className="hour" style={{transform: `rotate(${hourDegree}deg)`}}></div>
+            <div className="minute" style={{transform: `rotate(${minuteDegree}deg)`}}></div>
+            <div className="second" style={{transform: `rotate(${secDegrees}deg)`}}></div>
+            <div className="center"></div>
         </section>
     );
 }

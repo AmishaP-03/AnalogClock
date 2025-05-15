@@ -1,4 +1,4 @@
-import AnalogClock from "./AnalogClock"
+import AnalogClock from "./AnalogClock/AnalogClock"
 
 function App() {
     return (

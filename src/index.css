@@ -24,11 +24,3 @@ body {
   align-items: center;
   justify-content: center;
 }
-
-.clock {
-  width: 20rem;
-  height: 20rem;
-  background-color: antiquewhite;
-  border-radius: 10rem;
-}
-
