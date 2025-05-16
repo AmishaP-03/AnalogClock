@@ -13,21 +13,8 @@ function AnalogClock() {
         // Maps an empty array of length 12 to the desired UI
         const ui = [...Array(12)].map((_, i) => {
             const number = i + 1;
-            const angle = number * 30;
-            return (
-            <div
-                key={number}
-                className="number"
-                style={{
-                transform: `rotate(${angle}deg) translate(8rem) rotate(-${angle}deg)` 
-                // 1. rotate(angle): Rotates the number to its correct position on the circle. 
-                // 2. translate(8rem): Pushes it outward from the center to the clock’s edge; depends on the size of the clock.
-                // 3. rotate(-angle): Keeps the text upright instead of rotated.
-                }}
-            >
-                {number}
-            </div>
-            );
+            // Angle for each number = (number * 30) - 90. By default, 0 deg is at 3 o'clock position. So, we beed to have an offset of -90 deg.
+            return (<div key={number} className={`number n-${number}`}><p className="number-label">{number}</p></div>);
         });
         setNumbersUI(ui);
 
@@ -60,9 +47,9 @@ function AnalogClock() {
     return (
         <section className="clock">
             <div className="numbers-section">{numbersUI}</div>
-            <div className="hour" style={{transform: `rotate(${hourDegree}deg)`}}></div>
-            <div className="minute" style={{transform: `rotate(${minuteDegree}deg)`}}></div>
-            <div className="second" style={{transform: `rotate(${secDegrees}deg)`}}></div>
+            <div className="hand hour" style={{transform: `translateX(-50%) rotate(${hourDegree}deg)`}}></div>
+            <div className="hand minute" style={{transform: `translateX(-50%) rotate(${minuteDegree}deg)`}}></div>
+            <div className="hand second" style={{transform: `rotate(${secDegrees}deg)`}}></div>
             <div className="center"></div>
         </section>
     );
